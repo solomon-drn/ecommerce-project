@@ -1,10 +1,10 @@
-import "./header.css"
-import "./Homepage.css"
-
+import "./header.css";
+import "./Homepage.css";
 
 const HomePage = () => {
   return (
     <>
+      <title>Ecommerce Project</title>
       <div className="header">
         <div className="left-section">
           <a href="index.html" className="header-link">
