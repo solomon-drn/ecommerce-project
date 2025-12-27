@@ -1,0 +1,16 @@
+/* Wrapper spacing to avoid sticking to the header */
+.not-found {
+  min-height: calc(100vh - 80px); /* adjust if Header height differs */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Message styling */
+.not-found p {
+  font-size: 5rem;
+  font-weight: 500;
+  color: black;
+  text-align: center;
+}

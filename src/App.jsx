@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage.jsx";
 import CheckoutPage from "./pages/Checkout/CheckoutPage.jsx";
 import OrdersPage from "./pages/OrdersPage.jsx";
 import TrackingPage from "./pages/TrackingPage.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path="/checkout" element={<CheckoutPage/>} />
       <Route path="/orders" element={<OrdersPage/>} />
       <Route path="/tracking" element={<TrackingPage/>} />
+      <Route path="*" element={<NotFound/>} />
     </Routes>
   );
 }
