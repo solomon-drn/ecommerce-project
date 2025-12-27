@@ -4,6 +4,7 @@ const TrackingPage = () => {
   return (
     <>
       <title>Tracking</title>
+      <link rel="icon" href="/tracking-favicon.png" />
       <div className="header">
         <div className="left-section">
           <a href="/" className="header-link">
