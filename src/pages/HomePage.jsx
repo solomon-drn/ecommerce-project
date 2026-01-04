@@ -5,14 +5,14 @@ import "./Homepage.css";
 import { useEffect, useState } from "react";
 import { formatMoney } from "../utils/money";
 
-const HomePage = ({cart}) => {
-  const [products, setProducts] = useState([])
+const HomePage = ({ cart }) => {
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios.get("/api/products").then((response) => {
       setProducts(response.data);
     });
-  })
+  });
 
   return (
     <>
