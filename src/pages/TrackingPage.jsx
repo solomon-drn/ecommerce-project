@@ -1,41 +1,38 @@
 import { Link, useParams } from "react-router";
 import "./TrackingPage.css"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import dayjs from "dayjs";
+import Header from "../components/Header";
     
-const TrackingPage = () => {
+const TrackingPage = ({cart}) => {
   const { orderId, productId } = useParams()
-  
+
+  const [order, setOrder] = useState(null);
+
+  useEffect(() => {
+    const getTrackingData = async () => {
+      const response = await axios.get(`/api/orders/${orderId}?expand=products`);
+      setOrder(response.data);
+    };
+
+    getTrackingData();
+  }, [orderId]);
+
+  if (!order) {
+    return null;
+  }
+
+  const orderProduct = order.products.find((orderProduct) => {
+    return orderProduct.productId === productId;
+  });
+
+
   return (
     <>
       <title>Tracking</title>
       <link rel="icon" href="/tracking-favicon.png" />
-      <div className="header">
-        <div className="left-section">
-          <Link to="/" className="header-link">
-            <img className="logo" src="images/logo-white.png" />
-            <img className="mobile-logo" src="images/mobile-logo-white.png" />
-          </Link>
-        </div>
-
-        <div className="middle-section">
-          <input className="search-bar" type="text" placeholder="Search" />
-
-          <button className="search-button">
-            <img className="search-icon" src="images/icons/search-icon.png" />
-          </button>
-        </div>
-
-        <div className="right-section">
-          <Link className="orders-link header-link" href="/orders">
-            <span className="orders-text">Orders</span>
-          </Link>
-
-          <Link className="cart-link header-link" href="/checkout">
-            <img className="cart-icon" src="images/icons/cart-icon.png" />
-            <div className="cart-quantity">3</div>
-            <div className="cart-text">Cart</div>
-          </Link>
-        </div>
-      </div>
+      <Header cart={cart} />
 
       <div className="tracking-page">
         <div className="order-tracking">
@@ -43,17 +40,19 @@ const TrackingPage = () => {
             View all orders
           </Link>
 
-          <div className="delivery-date">Arriving on Monday, June 13</div>
-
-          <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
+          <div className="delivery-date">
+            Arriving on {dayjs(orderProduct.estimatedDeliveryTimeMs).format('dddd, MMMM D')}
           </div>
 
-          <div className="product-info">Quantity: 1</div>
+          <div className="product-info">
+            {orderProduct.product.name}
+          </div>
+
+          <div className="product-info">Quantity: {orderProduct.quantity}</div>
 
           <img
             className="product-image"
-            src="images/products/athletic-cotton-socks-6-pairs.jpg"
+            src={orderProduct.product.image}
           />
 
           <div className="progress-labels-container">
