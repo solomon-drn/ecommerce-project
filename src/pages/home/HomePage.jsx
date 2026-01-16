@@ -5,16 +5,16 @@ import "./Homepage.css";
 import { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
 
-const HomePage = ({ cart,loadCart }) => {
+const HomePage = ({ cart, loadCart }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const getHomeData = async () => {
-      const response = await axios.get("/api/products")
+      const response = await axios.get("/api/products");
       setProducts(response.data);
-    }
+    };
 
-    getHomeData()
+    getHomeData();
   }, []);
 
   return (
@@ -23,7 +23,7 @@ const HomePage = ({ cart,loadCart }) => {
       <link rel="icon" href="/home-favicon.png" />
       <Header cart={cart} />
       <div className="home-page">
-        <ProductsGrid products={products} loadCart={loadCart}/>
+        <ProductsGrid products={products} loadCart={loadCart} />
       </div>
     </>
   );
