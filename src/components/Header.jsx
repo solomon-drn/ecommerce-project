@@ -1,4 +1,4 @@
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import CartIcon from '../assets/images/icons/cart-icon.png';
 import SearchIcon from '../assets/images/icons/search-icon.png';
 import LogoWhite from '../assets/images/logo-white.png';
@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const Header = ({ cart }) => {
 
+  const navigate = useNavigate();
   const [search, setSearch] = useState('');
 
   const updateSearchInput = (event) => {
@@ -15,7 +16,7 @@ const Header = ({ cart }) => {
   };
 
   const searchProducts = () => {
-    console.log(search);
+    navigate(`/?search=${search}`);
   };
 
   let totalQuantity = 0
