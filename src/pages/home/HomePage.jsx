@@ -4,18 +4,22 @@ import CheckmarkIcon from "../../assets/images/icons/checkmark.png";
 import "./Homepage.css";
 import { useEffect, useState } from "react";
 import ProductsGrid from "./ProductsGrid";
+import { useSearchParams } from "react-router";
 
 const HomePage = ({ cart, loadCart }) => {
   const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
 
   useEffect(() => {
     const getHomeData = async () => {
-      const response = await axios.get("/api/products");
+      const urlPath = search ? `/api/products?search=${search}` : '/api/products';
+      const response = await axios.get(urlPath);
       setProducts(response.data);
     };
 
     getHomeData();
-  }, []);
+  }, [search]);
 
   return (
     <>
